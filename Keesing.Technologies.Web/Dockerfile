@@ -1,4 +1,6 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
+#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
+FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
@@ -6,6 +8,7 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 COPY ["Keesing.Technologies.Web/Keesing.Technologies.Web.csproj", "Keesing.Technologies.Web/"]
+COPY ["Keesing.Technologies.Core/Keesing.Technologies.Core.csproj", "Keesing.Technologies.Core/"]
 RUN dotnet restore "Keesing.Technologies.Web/Keesing.Technologies.Web.csproj"
 COPY . .
 WORKDIR "/src/Keesing.Technologies.Web"
